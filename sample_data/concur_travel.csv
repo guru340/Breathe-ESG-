@@ -1,0 +1,6 @@
+report_id,employee_id,expense_type,transaction_date,vendor,origin,destination,distance_km,nights,amount,currency,cost_center
+TR-9001,E1024,Airfare,2026-02-04,Lufthansa,BER,JFK,6385,,842.10,EUR,DE01
+TR-9001,E1024,Hotel,2026-02-04,Marriott Midtown,,, ,4,1280.00,USD,DE01
+TR-9002,E1832,Taxi,2026-02-11,Uber Business,SFO,SJC,55,,118.40,USD,US01
+TR-9003,E2101,Airfare,2026-02-18,IndiGo,PNQ,DEL,,,15600.00,INR,IN01
+TR-9004,E1024,Rental Car,2026-03-03,Hertz,DTW,TOL,101,,211.00,USD,US01

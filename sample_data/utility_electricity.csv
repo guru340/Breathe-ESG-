@@ -1,0 +1,5 @@
+bill_id,account_number,meter_number,facility_code,service_address,period_start,period_end,usage_kwh,demand_kw,tariff,total_charge,currency
+UTIL-2026-001,78392011,MTR-DE-0041,DE01,"Alexanderplatz 4, Berlin",2026-01-01,2026-01-31,184320,620,IND-HT,49210.50,EUR
+UTIL-2026-002,88372019,MTR-US-1190,US01,"92 Foundry Road, Dayton OH",2026-01-10,2026-02-08,231880,810,GS-3,28990.10,USD
+UTIL-2026-003,99421170,MTR-IN-3304,IN01,"Hinjewadi Phase 2, Pune",2026-02-01,2026-02-28,76450,190,HT-I,763200.00,INR
+UTIL-2026-004,78392011,MTR-DE-0041,DE01,"Alexanderplatz 4, Berlin",2026-02-01,2026-03-19,271100,670,IND-HT,72102.95,EUR
