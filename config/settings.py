@@ -95,15 +95,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+SQLITE_PATH = Path(os.environ.get('SQLITE_PATH', BASE_DIR / 'db.sqlite3'))
+if os.environ.get('VERCEL') and 'SQLITE_PATH' not in os.environ:
+    SQLITE_PATH = Path('/tmp/db.sqlite3')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': SQLITE_PATH,
     }
 }
 
 DATABASES['default'] = dj_database_url.config(
-    default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+    default=f"sqlite:///{SQLITE_PATH}",
     conn_max_age=600,
 )
 

@@ -7,6 +7,7 @@ from rest_framework import status, viewsets
 from rest_framework.decorators import action, api_view
 from rest_framework.response import Response
 
+from .bootstrap import ensure_demo_database
 from .ingestion import ingest_csv
 from .models import AuditEvent, EmissionActivity, Facility, IngestionBatch, SourceSystem, Tenant
 from .serializers import (
@@ -35,26 +36,43 @@ class TenantViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tenant.objects.all()
     serializer_class = TenantSerializer
 
+    def get_queryset(self):
+        ensure_demo_database()
+        return super().get_queryset()
+
 
 class FacilityViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Facility.objects.select_related('tenant')
     serializer_class = FacilitySerializer
+
+    def get_queryset(self):
+        ensure_demo_database()
+        return super().get_queryset()
 
 
 class SourceSystemViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = SourceSystem.objects.select_related('tenant')
     serializer_class = SourceSystemSerializer
 
+    def get_queryset(self):
+        ensure_demo_database()
+        return super().get_queryset()
+
 
 class IngestionBatchViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = IngestionBatch.objects.select_related('tenant', 'source')
     serializer_class = IngestionBatchSerializer
+
+    def get_queryset(self):
+        ensure_demo_database()
+        return super().get_queryset()
 
 
 class EmissionActivityViewSet(viewsets.ModelViewSet):
     serializer_class = EmissionActivitySerializer
 
     def get_queryset(self):
+        ensure_demo_database()
         queryset = EmissionActivity.objects.select_related('tenant', 'facility', 'source', 'batch', 'raw_record').prefetch_related('audit_events')
         tenant = self.request.query_params.get('tenant')
         status_filter = self.request.query_params.get('status')
@@ -127,6 +145,7 @@ class EmissionActivityViewSet(viewsets.ModelViewSet):
 
 @api_view(['POST'])
 def upload_ingestion(request):
+    ensure_demo_database()
     tenant = get_object_or_404(Tenant, slug=request.data.get('tenant', 'acme-industrial'))
     source = get_object_or_404(SourceSystem, tenant=tenant, source_type=request.data.get('source_type'))
     uploaded = request.FILES.get('file')
@@ -138,6 +157,7 @@ def upload_ingestion(request):
 
 @api_view(['GET'])
 def dashboard_summary(request):
+    ensure_demo_database()
     tenant_slug = request.query_params.get('tenant', 'acme-industrial')
     activities = EmissionActivity.objects.filter(tenant__slug=tenant_slug)
     total = activities.aggregate(total=Sum('co2e_kg'))['total'] or Decimal('0')
