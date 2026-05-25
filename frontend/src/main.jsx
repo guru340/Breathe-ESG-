@@ -106,9 +106,15 @@ function App() {
   return (
     <main>
       <header className="topbar">
-        <div>
-          <p className="eyebrow">ACME Industrial</p>
-          <h1>Emissions ingestion review</h1>
+        <div className="brand-row">
+          <div className="logo-mark" aria-label="Breathe ESG logo">
+            <span>B</span>
+          </div>
+          <div>
+            <p className="wordmark">Breathe ESG</p>
+            <h1>Emissions ingestion review</h1>
+            <p className="eyebrow">ACME Industrial</p>
+          </div>
         </div>
         <div className="status-pill"><Database size={16} /> {summary?.rows || 0} normalized rows</div>
       </header>
@@ -161,7 +167,7 @@ function App() {
             {batches.slice(0, 5).map((batch) => (
               <div className="batch" key={batch.id}>
                 <strong>{batch.file_name}</strong>
-                <span>{batch.source_name} · {batch.row_count} rows · {batch.status}</span>
+                <span>{batch.source_name} - {batch.row_count} rows - {batch.status}</span>
               </div>
             ))}
           </div>
@@ -231,7 +237,7 @@ function App() {
               <details>
                 <summary>Audit trail</summary>
                 {(selected.audit_events || []).map((event) => (
-                  <p key={event.id} className="audit">{event.created_at} · {event.action} · {event.note}</p>
+                  <p key={event.id} className="audit">{event.created_at} - {event.action} - {event.note}</p>
                 ))}
               </details>
             </>

@@ -41,6 +41,38 @@ main {
   margin-bottom: 18px;
 }
 
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.logo-mark {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  place-items: center;
+  border: 1px solid #b8d3c4;
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 64% 28%, #d8f0df 0 16%, transparent 17%),
+    linear-gradient(145deg, #173b2a 0%, #2f7d57 58%, #7bb874 100%);
+  box-shadow: 0 10px 24px rgba(29, 74, 51, 0.16);
+  color: #ffffff;
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.wordmark {
+  margin: 0 0 2px;
+  color: #2f7d57;
+  font-size: 13px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
 .eyebrow {
   margin: 0 0 4px;
   color: #63716a;
@@ -373,6 +405,17 @@ pre {
 
   .metrics {
     gap: 8px;
+  }
+
+  .brand-row {
+    align-items: flex-start;
+  }
+
+  .logo-mark {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+    font-size: 22px;
   }
 
   .table-wrap {
